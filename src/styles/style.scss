@@ -1,0 +1,483 @@
+@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Heebo:400,700');
+
+:export { blackText: $black-text; }
+:export { grey: $grey; }
+:export { white: $white; }
+:export { green: $green; }
+:export { darkGrey: $dark-grey; }
+
+%action-popup {
+    position: absolute;
+    bottom: 100%;
+    background-color: #fff;
+    transition: max-height 0.5s, padding 0.5s;
+    overflow: hidden;
+    max-height: 0;
+  }
+
+html {
+    font-size: 100%;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1rem;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+svg {
+    color: transparent;
+}
+.Home__container {
+    h1 {
+        margin-top: -40px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
+.SearchForm__search {
+    border: 1px solid $green;
+    padding: 7px 10px;
+    border-radius: 3px;
+
+    &:hover {
+        background-color: $light-grey;
+        cursor: pointer;
+    }
+}
+.SearchForm__search.SearchForm__search_disabled {
+    border: 1px solid $grey;
+    &:hover {
+        cursor: initial;
+    }
+}
+.Home__container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+}
+.SearchHeader__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 2px 7px rgba(0,0,0,.2);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: hsla(0,0%,100%,.97);
+}
+.SearchHeader__h1 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    strong {
+        color: $green;
+    }
+}
+.SearchHeader__form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    input {
+        border: 1px solid #333;
+        outline: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 3px;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+}
+.SearchHeader__close {
+    position: absolute;
+    right: 40px;
+}
+.SearchForm__form {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    input {
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 3px;
+        flex-grow: 1;
+        display: flex;
+        border: 1px solid #ddd;
+    }
+}
+.Search__actions {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 3px 5px rgba(0,0,0,.2);
+}
+.StarFilter__container, .SortList__container {
+    flex: 1;
+    position: relative;
+}
+.StarFilter_button, .SortList__button {
+    color: $grey;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $light-grey;
+    }
+}
+.StarFilter__popup {
+    @extend %action-popup;
+    left: 0;
+}
+.StarFilter__popup.shown, .SortList__popup.shown {
+    max-height: 200px;
+    border: 1px solid #ddd;
+}
+.StarFilter__popup.shown {
+    padding: 10px;
+}
+.SortList__popup {
+    @extend %action-popup;
+    right: 0;
+    & > div {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+
+        &:not(.SortList__active):hover {
+            cursor: pointer;
+            background-color: $light-grey;
+            color: $black-text;
+        }
+    }
+}
+.SortList__active {
+    background-color: $green;
+    color: white;
+}
+.StarFilter__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+
+    &:hover {
+        cursor: pointer;
+        .StarFilter__checkbox {
+            background-color: $light-grey;
+        }
+        .StarFilter__checkbox.StarFilter__checked {
+            background-color: $dark-green;
+        }
+    }
+}
+.StarFilter__checkbox {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+}
+.StarFilter__checked {
+    border-color: $green;
+    background-color: $green;
+}
+.HouseItem__container {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    padding: 15px;
+    text-decoration: none;
+    color: $black-text;
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+.HouseItem__name {
+    margin: 10px 0;
+    font-size: 22px;
+}
+.HouseItem__active {
+    background-color: red;
+}
+.HouseItem__img {
+    border-radius: 4px;
+    width: 100%;
+}
+.HouseItem__like {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+.HouseItem__description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.HouseItem__rating svg, .ReviewItem__rating svg {
+    margin-right: 5px !important;
+}
+.HouseItem__address {
+    font-size: 12px;
+    color: $grey;
+    margin-bottom: 5px;
+}
+.HouseItem__price {
+    font-weight: 400;
+    font-size: 20px;
+    color: orange;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+.HouseInfo__container {
+    margin: 0 15px;
+}
+.HouseInfo__image {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    background-size: cover;
+}
+.HouseInfo__name {
+    margin-top: 10px;
+margin-bottom: 10px;
+}
+.HouseInfo__roominfo {
+    font-size: 12px;
+    display: flex;
+    font-weight: 600;
+    margin-bottom: 20px;
+
+    & > div {
+        margin-right: 10px;
+    }
+}
+.HouseInfo__ownerimg img{
+    border-radius: 50%;
+    background-color: #333;
+    margin-right: 10px;
+}
+.HouseInfo__ownerinfo {
+    align-items: stretch;
+    display: flex;
+    font-size: 11px;
+    margin-bottom: 20px;
+}
+.HouseInfo__ownerprofile {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h2 {
+        margin: 0;
+        font-size: 15px;
+    }
+}
+.SearchDetail__container {
+    margin-bottom: 20px;    
+    position: relative;
+    h3 {
+        margin-top: 0;
+        margin-bottom: 10px;  
+        font-size: 14px;
+        line-height: 1;
+        color: $dark-grey;
+        text-transform: uppercase;
+    }
+}
+.HouseInfo__comment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: #2fcc71;
+    border-radius: 100%;
+}
+.HouseInfo__condition {
+    margin-bottom: 20px;
+  
+    p {
+        color: $grey;
+        font-size: 12px;
+    }
+}
+.CommentModal__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+}
+.HouseReview__container {
+    margin: 0 15px;
+}
+.HouseReview__review_link {
+    position: relative;
+    right: -10px;
+    text-decoration: none;
+    font-weight: 600;
+    color: $dark-grey;
+    font-size: 12px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+}
+.HouseReview__review_overview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.HouseReview__review_list {
+    margin-top: 20px;
+}
+.ReviewItem__container {
+    display: flex;
+    margin-bottom: 10px;
+
+    img {
+        width: 40px;
+        height: 40px;
+        background-color: #000;
+        border-radius: 100%;
+        margin-right: 10px;
+    }
+}
+.ReviewItem__review_content {
+    flex: 1;
+    font-size: 14px;
+}
+.ReviewItem__review_author {
+    display: flex;
+    justify-content: space-between; 
+    flex-grow: 1;
+}
+.ReviewItem__time, .ReviewItem__date {
+    color: $grey;
+    font-size: 12px;
+}
+.ReviewItem__text {
+    font-size: 13px;
+    color: $dark-grey;
+}
+.ReviewItem__rating {
+
+}
+.CommentModal__header {
+    position: relative;
+    background-color: #2fcc71;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #0daa50;
+
+    h2 {
+        margin: 0;
+        color: #fff;
+        font-weight: 400;
+        font-size: 16px;
+    }
+}
+.CommentModal__form {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+.CommentModal__textarea {
+    height: 150px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.CommentModal__send {
+    color: #fff;
+    background-color: #2fcc71;
+    border: 1px solid #0daa50;
+    padding: 10px 15px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    align-self: flex-end;
+}
+.Action__back {
+    background-color: rgba(0,0,0,.6);
+    border-radius: 100%;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+        cursor: pointer;
+    }
+}
+.LikeButton_bg {
+    background-color: rgba(0,0,0,.6);
+    border-radius: 100%;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+.LikeButton__liked {
+    background-color: rgba(255,41,149,.5) !important;
+}
+.Rating__container {
+    display: flex;
+    svg {
+        margin-right: 10px;
+    }
+}
+.Loading__container {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+}
